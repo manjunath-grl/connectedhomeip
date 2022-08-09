@@ -84,6 +84,35 @@ tests:
               minValue: ColorTempPhysicalMinMiredsValue
               maxValue: ColorTempPhysicalMaxMiredsValue
 
+    #Add saved values
+    - label: "Send Test Add Arguments Command"
+      cluster: "Test Cluster"
+      command: "testAddArguments"
+      arguments:
+          values:
+              - name: "arg1"
+                value: ColorTempPhysicalMinMiredsValue
+              - name: "arg2"
+                value: ColorTempPhysicalMaxMiredsValue
+      response:
+          values:
+              - name: "returnValue"
+                value: ColorTempPhyValueAfterAdd
+
+    - label: "Move To Color Temperature command"
+      PICS: CC.S.F04 && CC.S.C0A.Rsp
+      command: "MoveToColorTemperature"
+      arguments:
+          values:
+              - name: "colorTemperature"
+                value: ColorTempPhyValueAfterAdd / 2
+              - name: "TransitionTime"
+                value: 10
+              - name: "OptionsMask"
+                value: 0
+              - name: "OptionsOverride"
+                value: 0
+
     - label: "TH sends MoveColorTemperature command to DUT with MoveMode = Up"
       PICS: CC.S.F04 && CC.S.C4B.Rsp
       command: "MoveColorTemperature"
