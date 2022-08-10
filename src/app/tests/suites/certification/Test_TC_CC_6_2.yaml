@@ -97,7 +97,7 @@ tests:
       response:
           values:
               - name: "returnValue"
-                value: ColorTempPhyValueAfterAdd
+                saveAs: ColorTempPhyValueAfterAdd
 
     - label: "Move To Color Temperature command"
       PICS: CC.S.F04 && CC.S.C0A.Rsp
