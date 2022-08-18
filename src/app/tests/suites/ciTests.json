@@ -116,7 +116,7 @@
         "Test_TC_CONTENTLAUNCHER_10_1"
     ],
     "ModeSelect": ["Test_TC_MOD_1_1"],
-    "MultipleFabrics": [],
+    "MultipleFabrics": ["Test_TC_CADMIN_1_15"],
     "OTASoftwareUpdate": ["OTA_SuccessfulTransfer"],
     "OnOff": [
         "Test_TC_OO_1_1",
