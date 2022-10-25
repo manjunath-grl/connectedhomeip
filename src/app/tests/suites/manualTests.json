@@ -327,7 +327,6 @@
     ],
     "PumpConfigurationControl": ["Test_TC_PCC_3_1"],
     "AccessControl": [
-        "Test_TC_ACL_2_3",
         "Test_TC_ACL_2_4",
         "Test_TC_ACL_2_5",
         "Test_TC_ACL_2_6",
