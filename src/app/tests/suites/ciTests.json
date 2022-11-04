@@ -7,6 +7,7 @@
     ],
     "BooleanState": ["Test_TC_BOOL_1_1", "Test_TC_BOOL_2_1"],
     "Binding": ["Test_TC_BIND_1_1"],
+    "BridgedDeviceBasicInformation": ["Test_TC_BRBINFO_2_1"],
     "Actions": ["Test_TC_ACT_1_1"],
     "ColorControl": [
         "Test_TC_CC_1_1",
@@ -252,6 +253,7 @@
         "BooleanState",
         "Actions",
         "Binding",
+        "BridgedDeviceBasicInformation",
         "ColorControl",
         "DeviceManagement",
         "Descriptor",

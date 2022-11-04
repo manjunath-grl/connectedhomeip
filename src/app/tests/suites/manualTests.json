@@ -339,7 +339,6 @@
     "UserLabel": ["Test_TC_ULABEL_3_1"],
     "BridgedDeviceBasicInformation": [
         "Test_TC_BRBINFO_1_1",
-        "Test_TC_BRBINFO_2_1",
         "Test_TC_BRBINFO_2_2",
         "Test_TC_BRBINFO_2_3"
     ],
