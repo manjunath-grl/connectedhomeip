@@ -3,7 +3,8 @@
         "TestAccessControlCluster",
         "Test_TC_ACL_1_1",
         "Test_TC_ACL_2_1",
-        "Test_TC_ACL_2_2"
+        "Test_TC_ACL_2_2",
+        "Test_TC_ACL_2_5"
     ],
     "BooleanState": ["Test_TC_BOOL_1_1", "Test_TC_BOOL_2_1"],
     "Binding": ["Test_TC_BIND_1_1"],

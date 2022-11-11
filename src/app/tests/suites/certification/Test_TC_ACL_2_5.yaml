@@ -20,10 +20,74 @@ PICS:
 
 config:
     nodeId: 0x12344321
-    cluster: "Basic"
+    cluster: "Access Control"
     endpoint: 0
+    D_OK_EMPTY:
+        type: octet_string
+        defaultValue: "1718"
+    D_OK_SINGLE:
+        type: octet_string
+        defaultValue: "17D00000F1FF01003D48656C6C6F20576F726C642E205468697320697320612073696E676C6520656C656D656E74206C6976696E6720617320612063686172737472696E670018"
+    D_BAD_LENGTH:
+        type: octet_string
+        defaultValue: "17D00000F1FF01003D48656C6C6F20576F726C642E205468697320697320612073696E676C6520656C656D656E74206C6976696E6720617320612063686172737472696E6700D00000F1FF02003248656C6C6F20576F726C642E205468697320697320612073696E676C6520656C656D656E7420616761696E2E2E2E2E2E2E0018"
 
 tests:
+    - label: "Wait for the commissioned device to be retrieved"
+      cluster: "DelayCommands"
+      command: "WaitForCommissionee"
+      arguments:
+          values:
+              - name: "nodeId"
+                value: nodeId
+
+    - label:
+          "TH1 reads DUT Endpoint 0 OperationalCredentials cluster
+          CurrentFabricIndex attribute"
+      cluster: "Operational Credentials"
+      command: "readAttribute"
+      attribute: "CurrentFabricIndex"
+      response:
+          saveAs: CurrentFabricIndex
+
+    - label:
+          "TH1 reads DUT Endpoint 0 AccessControl cluster
+          AccessControlExtensionChanged event"
+      PICS: ACL.S.E01
+      command: "readEvent"
+      event: "AccessControlExtensionChanged"
+      response:
+          value: []
+
+    - label:
+          "TH1 writes DUT Endpoint 0 AccessControl cluster Extension attribute,
+          value is list of AccessControlExtensionStruct containing 1 element
+          1.struct Data field: D_OK_EMPTY : 1718"
+      PICS: ACL.S.A0001
+      command: "writeAttribute"
+      attribute: "Extension"
+      arguments:
+          value: [{ Data: D_OK_EMPTY, FabricIndex: CurrentFabricIndex }]
+
+    - label:
+          "TH1 reads DUT Endpoint 0 AccessControl cluster
+          AccessControlExtensionChanged event"
+      PICS: ACL.S.E01
+      command: "readEvent"
+      event: "AccessControlExtensionChanged"
+      response:
+          value:
+              [
+                  {
+                      AdminNodeID: nodeId,
+                      AdminPasscodeID: null,
+                      ChangeType: 1,
+                      LatestValue:
+                          { Data: D_OK_EMPTY, FabricIndex: CurrentFabricIndex },
+                      FabricIndex: CurrentFabricIndex,
+                  },
+              ]
+
     - label: "Pre-Conditions"
       verification: |
           1.N1 is the node ID of TH1
