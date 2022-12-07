@@ -1,4 +1,4 @@
 {
-    "Test": ["Test_TC_BINFO_2_3_Simulated"],
+    "Test": ["Test_TC_BINFO_2_3_Simulated", "Test_TC_I_1_2_Simulated"],
     "collection": ["Test"]
 }
