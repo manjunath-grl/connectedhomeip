@@ -77,16 +77,14 @@ tests:
       event: "AccessControlExtensionChanged"
       response:
           value:
-              [
-                  {
-                      AdminNodeID: nodeId,
-                      AdminPasscodeID: null,
-                      ChangeType: 1,
-                      LatestValue:
-                          { Data: D_OK_EMPTY, FabricIndex: CurrentFabricIndex },
-                      FabricIndex: CurrentFabricIndex,
-                  },
-              ]
+              {
+                  AdminNodeID: nodeId,
+                  AdminPasscodeID: null,
+                  ChangeType: 1,
+                  LatestValue:
+                      { Data: D_OK_EMPTY, FabricIndex: CurrentFabricIndex },
+                  FabricIndex: CurrentFabricIndex,
+              }
 
     - label: "Pre-Conditions"
       verification: |
