@@ -59,33 +59,6 @@ tests:
       response:
           value: []
 
-    - label:
-          "TH1 writes DUT Endpoint 0 AccessControl cluster Extension attribute,
-          value is list of AccessControlExtensionStruct containing 1 element
-          1.struct Data field: D_OK_EMPTY : 1718"
-      PICS: ACL.S.A0001
-      command: "writeAttribute"
-      attribute: "Extension"
-      arguments:
-          value: [{ Data: D_OK_EMPTY, FabricIndex: CurrentFabricIndex }]
-
-    - label:
-          "TH1 reads DUT Endpoint 0 AccessControl cluster
-          AccessControlExtensionChanged event"
-      PICS: ACL.S.E01
-      command: "readEvent"
-      event: "AccessControlExtensionChanged"
-      response:
-          value:
-              {
-                  AdminNodeID: nodeId,
-                  AdminPasscodeID: null,
-                  ChangeType: 1,
-                  LatestValue:
-                      { Data: D_OK_EMPTY, FabricIndex: CurrentFabricIndex },
-                  FabricIndex: CurrentFabricIndex,
-              }
-
     - label: "Pre-Conditions"
       verification: |
           1.N1 is the node ID of TH1
