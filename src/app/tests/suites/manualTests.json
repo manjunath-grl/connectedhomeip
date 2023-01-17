@@ -299,12 +299,7 @@
         "Test_TC_S_3_1"
     ],
     "PumpConfigurationControl": ["Test_TC_PCC_3_1"],
-    "AccessControl": [
-        "Test_TC_ACL_2_5",
-        "Test_TC_ACL_2_6",
-        "Test_TC_ACL_2_8",
-        "Test_TC_ACL_2_10"
-    ],
+    "AccessControl": ["Test_TC_ACL_2_5", "Test_TC_ACL_2_6", "Test_TC_ACL_2_10"],
     "UserLabel": [],
     "BridgedDeviceBasicInformation": [
         "Test_TC_BRBINFO_2_2",
