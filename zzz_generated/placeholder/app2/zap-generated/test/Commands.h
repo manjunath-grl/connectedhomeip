@@ -2421,6 +2421,125 @@ private:
     }
 };
 
+class Test_TC_CNET_4_19_SimulatedSuite : public TestCommand
+{
+public:
+    Test_TC_CNET_4_19_SimulatedSuite() : TestCommand("Test_TC_CNET_4_19_Simulated", 9)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_CNET_4_19_SimulatedSuite() {}
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+
+        // Allow yaml to access the current commissioner node id.
+        // Default to 0 (undefined node id) so we know if this isn't
+        // set correctly.
+        // Reset on every step in case it changed.
+        chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        (void) commissionerNodeId;
+
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        // Allow yaml to access the current commissioner node id.
+        // Default to 0 (undefined node id) so we know if this isn't
+        // set correctly.
+        // Reset on every step in case it changed.
+        chip::NodeId commissionerNodeId = mCommissionerNodeId.ValueOr(0);
+        (void) commissionerNodeId;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the device to be commissioned");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissioning::Type value;
+            return WaitForCommissioning(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "DUT reads the MaxNetworks attribute from the TH");
+            VerifyOrDo(!ShouldSkip("CNET.C.A0000 && CNET.C.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitAttribute(GetEndpoint(0), NetworkCommissioning::Id, NetworkCommissioning::Attributes::MaxNetworks::Id);
+        }
+        case 2: {
+            LogStep(2, "DUT reads the Networks attribute from the TH");
+            VerifyOrDo(!ShouldSkip("CNET.C.A0001 && CNET.C.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitAttribute(GetEndpoint(0), NetworkCommissioning::Id, NetworkCommissioning::Attributes::Networks::Id);
+        }
+        case 3: {
+            LogStep(3, "DUT reads ScanMaxTimeSeconds attribute from the TH");
+            VerifyOrDo(!ShouldSkip("CNET.C.A0002 && CNET.C.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitAttribute(GetEndpoint(0), NetworkCommissioning::Id,
+                                 NetworkCommissioning::Attributes::ScanMaxTimeSeconds::Id);
+        }
+        case 4: {
+            LogStep(4, "DUT reads ConnectMaxTimeSeconds attribute from the TH");
+            VerifyOrDo(!ShouldSkip("CNET.C.A0003 && CNET.C.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitAttribute(GetEndpoint(0), NetworkCommissioning::Id,
+                                 NetworkCommissioning::Attributes::ConnectMaxTimeSeconds::Id);
+        }
+        case 5: {
+            LogStep(5, "DUT reads InterfaceEnabled attribute from the TH");
+            VerifyOrDo(!ShouldSkip("CNET.C.A0004 && CNET.C.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitAttribute(GetEndpoint(0), NetworkCommissioning::Id, NetworkCommissioning::Attributes::InterfaceEnabled::Id);
+        }
+        case 6: {
+            LogStep(6, "DUT reads LastNetworkingStatus attribute from the TH");
+            VerifyOrDo(!ShouldSkip("CNET.C.A0005 && CNET.C.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitAttribute(GetEndpoint(0), NetworkCommissioning::Id,
+                                 NetworkCommissioning::Attributes::LastNetworkingStatus::Id);
+        }
+        case 7: {
+            LogStep(7, "DUT reads LastNetworkID attribute from the TH");
+            VerifyOrDo(!ShouldSkip("CNET.C.A0006 && CNET.C.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitAttribute(GetEndpoint(0), NetworkCommissioning::Id, NetworkCommissioning::Attributes::LastNetworkID::Id);
+        }
+        case 8: {
+            LogStep(8, "DUT reads LastConnectErrorValue attribute from the TH");
+            VerifyOrDo(!ShouldSkip("CNET.C.A0007 && CNET.C.F02"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitAttribute(GetEndpoint(0), NetworkCommissioning::Id,
+                                 NetworkCommissioning::Attributes::LastConnectErrorValue::Id);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
 std::unique_ptr<TestCommand> GetTestCommand(std::string testName)
 {
     if (testName == "Test_TC_BINFO_2_3_Simulated")
@@ -2515,6 +2634,10 @@ std::unique_ptr<TestCommand> GetTestCommand(std::string testName)
     {
         return std::unique_ptr<Test_TC_FLABEL_3_1_SimulatedSuite>(new Test_TC_FLABEL_3_1_SimulatedSuite());
     }
+    if (testName == "Test_TC_CNET_4_19_Simulated")
+    {
+        return std::unique_ptr<Test_TC_CNET_4_19_SimulatedSuite>(new Test_TC_CNET_4_19_SimulatedSuite());
+    }
 
     return nullptr;
 }
@@ -2545,4 +2668,5 @@ void PrintTestCommands()
     ChipLogError(chipTool, "\t* Test_TC_OCC_2_4_Simulated");
     ChipLogError(chipTool, "\t* Test_TC_ULABEL_3_1_Simulated");
     ChipLogError(chipTool, "\t* Test_TC_FLABEL_3_1_Simulated");
+    ChipLogError(chipTool, "\t* Test_TC_CNET_4_19_Simulated");
 }
