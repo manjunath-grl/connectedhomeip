@@ -25,9 +25,9 @@ config:
 
 tests:
     - label:
-          "DUT is Commissioned and put in Commissioning Mode using Open Basic
-          Commissioning Window command and starts advertising Commissionable
-          Node Discovery service using DNS-SD"
+          "Step 1: DUT is Commissioned and put in Commissioning Mode using Open
+          Basic Commissioning Window command and starts advertising
+          Commissionable Node Discovery service using DNS-SD"
       PICS: CADMIN.S.C01.Rsp
       verification: |
           ./chip-tool administratorcommissioning open-basic-commissioning-window 200 1 0 --timedInteractionTimeoutMs 1000
@@ -69,12 +69,12 @@ tests:
           The delay timer is given 200 as an example , use whatever works for your product
       disabled: true
 
-    - label: "Check DNS-SD subtypes used by DUT"
+    - label: "Step 2: Check DNS-SD subtypes used by DUT"
       PICS:
-          MCORE.COM.WIFI && MCORE.COM.ETH && MCORE.COM.THR &&
+          MCORE_COM_WIFI && MCORE_COM_ETH && MCORE_COM_THR &&
           MCORE.SC.VENDOR_SUBTYPE && MCORE.SC.DEVTYPE_SUBTYPE && MCORE.SC.VP_KEY
           && MCORE.SC.SII_OP_DISCOVERY_KEY && MCORE.SC.SAI_OP_DISCOVERY_KEY &&
-          MCORE.SC.DT_KEY&& MCORE.SC.DN_KEY && MCORE.SC.RI_KEY &&
+          MCORE.SC.DT_KEY && MCORE.SC.DN_KEY && MCORE.SC.RI_KEY &&
           MCORE.SC.PH_KEY && MCORE.SC.PI_KEY
       verification: |
           Run the below commands within the mentioned time interval used in open-commissioning-window in step-1.
@@ -85,7 +85,7 @@ tests:
 
           ubuntu@ubuntu:~$   avahi-browse -rt _matterc._udp
 
-          Verify the device is advertising _matterc._udp service like below output in TH terminal Log: (Verify for the DUT"s actual values (like vendor ID, PID ..etc) as mentioned in the expected outcome of the test plan, The below log contains the data from the reference raspi accessory)
+          Verify the device is advertising _matterc._udp service like below output in TH terminal Log: (Verify for the DUT's actual values (like vendor ID, PID ..etc) as mentioned in the expected outcome of the test plan, The below log contains the data from the reference raspi accessory)
 
 
           +  wlan0 IPv6 5A4E867284D08B13                              _matterc._udp        local
@@ -117,9 +117,9 @@ tests:
       disabled: true
 
     - label:
-          "DUT is rebooted, then put in Commissioning Mode using Open Basic
-          Commissioning Window command, starting advertising Commissionable Node
-          Discovery service using DNS-SD"
+          "Step 3: DUT is rebooted, then put in Commissioning Mode using Open
+          Basic Commissioning Window command, starting advertising
+          Commissionable Node Discovery service using DNS-SD"
       PICS: CADMIN.S.C01.Rsp
       verification: |
           Reboot the device and commission the DUT again. Open the commissioning window using the below command in the TH (Chip-tool) terminal
@@ -163,9 +163,9 @@ tests:
           The delay timer is given 200 as an example , use whatever works for your product
       disabled: true
 
-    - label: "Check DNS-SD subtypes used by DUT"
+    - label: "Step 4: Check DNS-SD subtypes used by DUT"
       PICS:
-          MCORE.COM.WIFI && MCORE.COM.ETH && MCORE.COM.THR &&
+          MCORE_COM_WIFI && MCORE_COM_ETH && MCORE_COM_THR &&
           MCORE.SC.VENDOR_SUBTYPE && MCORE.SC.DEVTYPE_SUBTYPE && MCORE.SC.VP_KEY
           && MCORE.SC.SII_OP_DISCOVERY_KEY && MCORE.SC.SAI_OP_DISCOVERY_KEY &&
           MCORE.SC.DT_KEY && MCORE.SC.DN_KEY && MCORE.SC.RI_KEY &&
@@ -207,14 +207,14 @@ tests:
           +;eth0;IPv6;_CM;_sub._matterc._udp;local
       disabled: true
 
-    - label: "Wait for OBCW timeout to expire"
+    - label: "Step 5: Wait for OBCW timeout to expire"
       verification: |
           Wait until open-basic-commissioning-window time to expire.
       disabled: true
 
     - label:
-          "DUT is Commissioned and instructed to enter in commissioning mode
-          using Open Commissioning Window command"
+          "Step 6: DUT is Commissioned and instructed to enter in commissioning
+          mode using Open Commissioning Window command"
       PICS: CADMIN.S.C00.Rsp
       verification: |
           Run the below open-commissioning-window in TH Terminal
@@ -256,13 +256,13 @@ tests:
           [1652341411.385860][2929:2934] CHIP:CTL: Successfully opened pairing window on the device
       disabled: true
 
-    - label: "Check DNS-SD subtypes used by DUT"
+    - label: "Step 7: Check DNS-SD subtypes used by DUT"
       PICS:
-          MCORE.COM.WIFI && MCORE.COM.ETH && MCORE.COM.THR &&
+          MCORE_COM_WIFI && MCORE_COM_ETH && MCORE_COM_THR &&
           MCORE.SC.VENDOR_SUBTYPE && MCORE.SC.DEVTYPE_SUBTYPE && MCORE.SC.VP_KEY
           && MCORE.SC.SII_OP_DISCOVERY_KEY && MCORE.SC.SAI_OP_DISCOVERY_KEY &&
-          MCORE.SC.DT_KEY && MCORE.SC.DN_KEY && MCORE.SC.RI_KEY &&
-          MCORE.SC.PH_KEY && MCORE.SC.PI_KEY
+          MCORE.SC.DT_KEY && MCORE.SC.DN_KEY MCORE.SC.RI_KEY && MCORE.SC.PH_KEY
+          && MCORE.SC.PI_KEY
       verification: |
           Same verification steps as Step 3, Except Verify CM flag  value to be 2
 
@@ -287,12 +287,13 @@ tests:
              txt = ["PI=" "PH=36" "CM=2" "D=3840" "T=1" "VP=65521+32769"]
       disabled: true
 
-    - label: "Wait for OCW timeout to expire"
+    - label: "Step 8: Wait for OCW timeout to expire"
       verification: |
           Wait until open-commissioning-window time to expire.
       disabled: true
 
-    - label: "If (MCORE.SC.EXTENDED_DISCOVERY ) enable Extended Discovery"
+    - label:
+          "Step 9: If (MCORE.SC.EXTENDED_DISCOVERY ) enable Extended Discovery"
       PICS: MCORE.SC.EXTENDED_DISCOVERY
       verification: |
           If the device supports Discovery for an extended period of time, the Device should continue to advertise. Use the avahi-browse command and you should see the _matterc._udp advertisement
@@ -302,15 +303,16 @@ tests:
       disabled: true
 
     - label:
-          "If (MCORE.SC.EXTENDED_DISCOVERY ) check DNS-SD subtypes used by DUT"
+          "Step 10: If (MCORE.SC.EXTENDED_DISCOVERY ) check DNS-SD subtypes used
+          by DUT"
       PICS:
-          MCORE.SC.EXTENDED_DISCOVERY && MCORE.COM.WIFI && MCORE.COM.ETH &&
-          MCORE.COM.THR && MCORE.SC.VENDOR_SUBTYPE && MCORE.SC.DEVTYPE_SUBTYPE
+          MCORE.SC.EXTENDED_DISCOVERY && MCORE_COM_WIFI && MCORE_COM_ETH &&
+          MCORE_COM_THR && MCORE.SC.VENDOR_SUBTYPE && MCORE.SC.DEVTYPE_SUBTYPE
           && MCORE.SC.VP_KEY && MCORE.SC.SII_OP_DISCOVERY_KEY &&
           MCORE.SC.SAI_OP_DISCOVERY_KEY && MCORE.SC.DT_KEY && MCORE.SC.DN_KEY &&
           MCORE.SC.RI_KEY && MCORE.SC.PH_KEY && MCORE.SC.PI_KEY
       verification: |
-          Run and Verify on  the below output in TH terminal Log: (Below is the sample log , as RPI doesn"t support the extended discovery)
+          Run and Verify on  the below output in TH terminal Log: (Below is the sample log , as RPI doesn't support the extended discovery) 
           Verify the CM flag value is 0
 
           avahi-browse -rt _matterc._udp

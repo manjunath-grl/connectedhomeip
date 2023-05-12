@@ -23,7 +23,7 @@ config:
     endpoint: 1
 
 tests:
-    - label: "Wait for the commissioned device to be retrieved"
+    - label: "PreCondition: Wait for the commissioned device to be retrieved"
       cluster: "DelayCommands"
       command: "WaitForCommissionee"
       arguments:
@@ -31,7 +31,7 @@ tests:
               - name: "nodeId"
                 value: nodeId
 
-    - label: "Send Numbers1"
+    - label: "Step 1: Send Numbers1"
       PICS: KEYPADINPUT.S.C00.Rsp && KEYPADINPUT.S.NK
       command: "SendKey"
       arguments:
@@ -43,7 +43,7 @@ tests:
               - name: "Status"
                 value: 0
 
-    - label: "Send Numbers2"
+    - label: "Step 1: Send Numbers2"
       PICS: KEYPADINPUT.S.C00.Rsp && KEYPADINPUT.S.NK
       command: "SendKey"
       arguments:
@@ -55,7 +55,7 @@ tests:
               - name: "Status"
                 value: 0
 
-    - label: "Send Numbers3"
+    - label: "Step 1: Send Numbers3"
       PICS: KEYPADINPUT.S.C00.Rsp && KEYPADINPUT.S.NK
       command: "SendKey"
       arguments:
@@ -67,7 +67,7 @@ tests:
               - name: "Status"
                 value: 0
 
-    - label: "Send Numbers4"
+    - label: "Step 1: Send Numbers4"
       PICS: KEYPADINPUT.S.C00.Rsp && KEYPADINPUT.S.NK
       command: "SendKey"
       arguments:
@@ -79,7 +79,7 @@ tests:
               - name: "Status"
                 value: 0
 
-    - label: "Send Numbers5"
+    - label: "Step 1: Send Numbers5"
       PICS: KEYPADINPUT.S.C00.Rsp && KEYPADINPUT.S.NK
       command: "SendKey"
       arguments:
@@ -91,7 +91,7 @@ tests:
               - name: "Status"
                 value: 0
 
-    - label: "Send Numbers6"
+    - label: "Step 1: Send Numbers6"
       PICS: KEYPADINPUT.S.C00.Rsp && KEYPADINPUT.S.NK
       command: "SendKey"
       arguments:
@@ -103,7 +103,7 @@ tests:
               - name: "Status"
                 value: 0
 
-    - label: "Send Numbers7"
+    - label: "Step 1: Send Numbers7"
       PICS: KEYPADINPUT.S.C00.Rsp && KEYPADINPUT.S.NK
       command: "SendKey"
       arguments:
@@ -115,7 +115,7 @@ tests:
               - name: "Status"
                 value: 0
 
-    - label: "Send Numbers8"
+    - label: "Step 1: Send Numbers8"
       PICS: KEYPADINPUT.S.C00.Rsp && KEYPADINPUT.S.NK
       command: "SendKey"
       arguments:
@@ -127,7 +127,7 @@ tests:
               - name: "Status"
                 value: 0
 
-    - label: "Send Numbers9"
+    - label: "Step 1: Send Numbers9"
       PICS: KEYPADINPUT.S.C00.Rsp && KEYPADINPUT.S.NK
       command: "SendKey"
       arguments:

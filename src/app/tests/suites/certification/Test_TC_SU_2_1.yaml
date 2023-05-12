@@ -24,7 +24,7 @@ config:
     endpoint: 0
 
 tests:
-    - label: "DUT sends a QueryImage command to the TH/OTA-P"
+    - label: "Step 1: DUT sends a QueryImage command to the TH/OTA-P"
       verification: |
           ./chip-tool otasoftwareupdaterequestor announce-otaprovider 0xDEADBEEF 0 0 0 0x1234567890 0
 
@@ -54,7 +54,8 @@ tests:
       disabled: true
 
     - label:
-          "DUT sends a QueryImage command to the TH/OTA-P. Wait for 2 minutes."
+          "Step 2: DUT sends a QueryImage command to the TH/OTA-P. Wait for 2
+          minutes."
       verification: |
           Run the OTA Provider App using the command:
 
@@ -68,7 +69,8 @@ tests:
       disabled: true
 
     - label:
-          "TH2/Administrator sends an AnnounceOTAProvider command to the DUT."
+          "Step 3: TH2/Administrator sends an AnnounceOTAProvider command to the
+          DUT."
       verification: |
           ./chip-tool otasoftwareupdaterequestor announce-otaprovider 0xDEADBEEF 0 1 0 0x1234567890 0
 

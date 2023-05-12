@@ -25,8 +25,8 @@ config:
 
 tests:
     - label:
-          "OTA-R/TH sends a QueryImage Command to the DUT. UserConsentNeeded
-          field is set to False."
+          "Step 1: OTA-R/TH sends a QueryImage Command to the DUT.
+          UserConsentNeeded field is set to False."
       verification: |
           ./chip-tool otasoftwareupdaterequestor announce-otaprovider 0xDEADBEEF 0 0 0 0x1234567890 0
 

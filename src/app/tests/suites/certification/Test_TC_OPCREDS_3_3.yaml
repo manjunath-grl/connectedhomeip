@@ -35,15 +35,15 @@ tests:
       disabled: true
 
     - label:
-          "Factory Reset DUT (to ensure NOC list is empty at the beginning of
-          the following steps)"
-      PICS: MCORE.UI.FACTORYRESET
+          "Step 1: Factory Reset DUT (to ensure NOC list is empty at the
+          beginning of the following steps)"
+      PICS: MCORE.FACTORY_RESET
       verification: |
           On both DUT and TH side, on Raspi we do factory reset with the below command. The DUT for cert should follow vendor specific procedure for factory reset
           sudo rm -rf /tmp/chip_*
       disabled: true
 
-    - label: "Start the commissioning process of TH with DUT"
+    - label: "Step 2: Start the commissioning process of TH with DUT"
       verification: |
           ./chip-tool pairing ble-wifi 1 GRLPrivate_EXT matter123 20202021 3840 --trace_decode 1
           [1641381202.376419][5628:5633] CHIP:CTL: Received success response 0x3df8
@@ -525,8 +525,8 @@ tests:
       disabled: true
 
     - label:
-          "Extract the CSRResponse values for future use from TH NOCSRElements -
-          which contains the Node Operational PublicKey from CSR
+          "Step 5b: Extract the CSRResponse values for future use from TH
+          NOCSRElements - which contains the Node Operational PublicKey from CSR
           AttestationSignature"
       verification: |
           Extract the CSRResponse values from TH (all-clusters-app) commissioning log
@@ -824,9 +824,9 @@ tests:
       disabled: true
 
     - label:
-          "TH saves the following values as: NOCValue as nocvalue1 ICACValue as
-          icacvalue1 IpkValue as ipkvalue1 CaseAdminSubject as caseadmin1
-          AdminVendorId as adminvendorid1"
+          "Step 7b: TH saves the following values as: NOCValue as nocvalue1
+          ICACValue as icacvalue1 IpkValue as ipkvalue1 CaseAdminSubject as
+          caseadmin1 AdminVendorId as adminvendorid1"
       verification: |
           Save the following from above log
 
@@ -863,7 +863,7 @@ tests:
       disabled: true
 
     - label:
-          "Extract the following FabricDescriptorStruct values from TH
+          "Step 8: Extract the following FabricDescriptorStruct values from TH
           RootPublicKey VendorID FabricID NodeID Label"
       verification: |
           ./chip-tool operationalcredentials read fabrics 1 0 --fabric-filtered 0 --trace_decode 1
@@ -1007,7 +1007,7 @@ tests:
           Not verifiable for V1.0
       disabled: true
 
-    - label: "DUT sends UpdateNOC to TH"
+    - label: "Step 11: DUT sends UpdateNOC to TH"
       PICS: OPCREDS.C.C07.Tx
       verification: |
           During commissioning, Verify that UpdateNOC Command is received in TH (all-clusters-app)
@@ -1143,7 +1143,7 @@ tests:
           [1655968444.504076][21387:21392] CHIP:CTL: Successfully finished commissioning step "SendNOC"
       disabled: true
 
-    - label: "DUT sends UpdateFabricLabel to TH"
+    - label: "Step 12: DUT sends UpdateFabricLabel to TH"
       PICS: OPCREDS.C.C09.Tx
       verification: |
           ./chip-tool operationalcredentials update-fabric-label node1 1 0
@@ -1238,7 +1238,7 @@ tests:
           [1666944510.327563][5096:5096] CHIP:DMG:
       disabled: true
 
-    - label: "DUT reads SupportedFabrics from TH"
+    - label: "Step 13: DUT reads SupportedFabrics from TH"
       PICS: OPCREDS.C.A0002
       verification: |
           ./chip-tool operationalcredentials read supported-fabrics 1 0
@@ -1312,7 +1312,7 @@ tests:
           [1666944724.023827][5114:5114] CHIP:DMG:         ],
       disabled: true
 
-    - label: "DUT reads CommissionedFabrics attribute from TH"
+    - label: "Step 14: DUT reads CommissionedFabrics attribute from TH"
       PICS: OPCREDS.C.A0003
       verification: |
           ./chip-tool operationalcredentials read commissioned-fabrics 1 0
@@ -1331,10 +1331,10 @@ tests:
           [1666944821.351126][5129:5129] CHIP:DMG:                         Cluster = 0x3e,
           [1666944821.351215][5129:5129] CHIP:DMG:                         Attribute = 0x0000_0003,
           [1666944821.351312][5129:5129] CHIP:DMG:                 }
-          [1666944821.351390][5129:5129] CHIP:DMG:
+          [1666944821.351390][5129:5129] CHIP:DMG:                         
           [1666944821.351481][5129:5129] CHIP:DMG:         ],
-          [1666944821.351554][5129:5129] CHIP:DMG:
-          [1666944821.351620][5129:5129] CHIP:DMG:         isFabricFiltered = true,
+          [1666944821.351554][5129:5129] CHIP:DMG:                 
+          [1666944821.351620][5129:5129] CHIP:DMG:         isFabricFiltered = true, 
           [1666944821.351877][5129:5129] CHIP:DMG:         InteractionModelRevision = 1
           [1666944821.351945][5129:5129] CHIP:DMG: },
           [1666944821.352144][5129:5129] CHIP:DMG: IM RH moving to [GeneratingReports]
@@ -1386,7 +1386,7 @@ tests:
           [1666944821.357376][5129:5129] CHIP:DMG:         ],
       disabled: true
 
-    - label: "DUT reads TrustedRootCertificates attribute from TH"
+    - label: "Step 15: DUT reads TrustedRootCertificates attribute from TH"
       PICS: OPCREDS.C.A0004
       verification: |
           ./chip-tool operationalcredentials read trusted-root-certificates 1 0
@@ -1482,7 +1482,7 @@ tests:
           [1666944860.388996][5129:5129] CHIP:DMG:         ],
       disabled: true
 
-    - label: "DUT reads CurrentFabricIndex attribute from TH"
+    - label: "Step 16: DUT reads CurrentFabricIndex attribute from TH"
       PICS: OPCREDS.C.A0005
       verification: |
           ./chip-tool operationalcredentials read   current-fabric-index   1 0
@@ -1556,7 +1556,7 @@ tests:
           [1666944974.337378][5129:5129] CHIP:DMG:         ],
       disabled: true
 
-    - label: "DUT sends RemoveFabric command to TH"
+    - label: "Step 17: DUT sends RemoveFabric command to TH"
       PICS: OPCREDS.C.C0a.Tx
       verification: |
           ./chip-tool operationalcredentials remove-fabric 1 1 0
@@ -1723,19 +1723,19 @@ tests:
           [1666945062.315868][5129:5129] CHIP:DMG: Command handler moving to [AddedComma]
           [1666945062.315939][5129:5129] CHIP:IN: Expiring all sessions for fabric 0x1!!
           [1666945062.315996][5129:5129] CHIP:IN: SecureSession[0xaaaaf53b08f0]: MarkForEviction Type:2 LSID:49150
-          [1666945062.316053][5129:5129] CHIP:SC: SecureSession[0xaaaaf53b08f0]: Moving from state "kActive" --> "kPendingEviction"
+          [1666945062.316053][5129:5129] CHIP:SC: SecureSession[0xaaaaf53b08f0]: Moving from state 'kActive' --> 'kPendingEviction'
           [1666945062.316111][5129:5129] CHIP:IN: SecureSession[0xaaaaf53b08f0]: Released - Type:2 LSID:49150
           [1666945062.316211][5129:5129] CHIP:IN: SecureSession[0xaaaaf53d2ec0]: MarkForEviction Type:2 LSID:49151
-          [1666945062.316268][5129:5129] CHIP:SC: SecureSession[0xaaaaf53d2ec0]: Moving from state "kActive" --> "kPendingEviction"
+          [1666945062.316268][5129:5129] CHIP:SC: SecureSession[0xaaaaf53d2ec0]: Moving from state 'kActive' --> 'kPendingEviction'
           [1666945062.316324][5129:5129] CHIP:IN: SecureSession[0xaaaaf53d2ec0]: Released - Type:2 LSID:49151
           [1666945062.316406][5129:5129] CHIP:IN: SecureSession[0xaaaaf52e6e10]: MarkForEviction Type:2 LSID:49152
-          [1666945062.316464][5129:5129] CHIP:SC: SecureSession[0xaaaaf52e6e10]: Moving from state "kActive" --> "kPendingEviction"
+          [1666945062.316464][5129:5129] CHIP:SC: SecureSession[0xaaaaf52e6e10]: Moving from state 'kActive' --> 'kPendingEviction'
           [1666945062.316517][5129:5129] CHIP:IN: SecureSession[0xaaaaf52e6e10]: Released - Type:2 LSID:49152
           [1666945062.316574][5129:5129] CHIP:IN: SecureSession[0xaaaaf53cf6f0]: MarkForEviction Type:2 LSID:49153
-          [1666945062.316651][5129:5129] CHIP:SC: SecureSession[0xaaaaf53cf6f0]: Moving from state "kActive" --> "kPendingEviction"
+          [1666945062.316651][5129:5129] CHIP:SC: SecureSession[0xaaaaf53cf6f0]: Moving from state 'kActive' --> 'kPendingEviction'
           [1666945062.316705][5129:5129] CHIP:IN: SecureSession[0xaaaaf53cf6f0]: Released - Type:2 LSID:49153
           [1666945062.316761][5129:5129] CHIP:IN: SecureSession[0xaaaaf53d33c0]: MarkForEviction Type:2 LSID:49154
-          [1666945062.316834][5129:5129] CHIP:SC: SecureSession[0xaaaaf53d33c0]: Moving from state "kActive" --> "kPendingEviction"
+          [1666945062.316834][5129:5129] CHIP:SC: SecureSession[0xaaaaf53d33c0]: Moving from state 'kActive' --> 'kPendingEviction'
           [1666945062.316961][5129:5129] CHIP:DMG: Decreasing reference count for CommandHandler, remaining 0
           [1666945062.317650][5129:5129] CHIP:EM: <<< [E:55862r M:7155928 (Ack:103508994)] (S) Msg TX to 1:000000000001B669 [0000] --- Type 0001:09 (IM:InvokeCommandResponse)
           [1666945062.317757][5129:5129] CHIP:IN: (S) Sending msg 7155928 on secure session with LSID: 49154

@@ -24,7 +24,7 @@ config:
     endpoint: 0
 
 tests:
-    - label: "Perform a software update on the DUT."
+    - label: "Step 1: Perform a software update on the DUT."
       verification: |
           ./chip-tool interactive start
 
@@ -54,8 +54,8 @@ tests:
       disabled: true
 
     - label:
-          "DUT sends a QueryImage command to the TH/OTA-P. TH/OTA-P sends a
-          QueryImageResponse back to DUT. QueryStatus is set to 'Busy'."
+          "Step 2: DUT sends a QueryImage command to the TH/OTA-P. TH/OTA-P
+          sends a QueryImageResponse back to DUT. QueryStatus is set to 'Busy'."
       verification: |
           ./chip-tool interactive start
 
@@ -95,8 +95,8 @@ tests:
       disabled: true
 
     - label:
-          "DUT sends a QueryImage command to the TH/OTA-P. TH/OTA-P does not
-          respond back to DUT."
+          "Step 3: DUT sends a QueryImage command to the TH/OTA-P. TH/OTA-P does
+          not respond back to DUT."
       verification: |
           ./chip-tool interactive start
 
@@ -126,9 +126,9 @@ tests:
       disabled: true
 
     - label:
-          "DUT sends a QueryImage command to the TH/OTA-P. RequestorCanConsent
-          is set to True by DUT. OTA-P/TH responds with a QueryImageResponse
-          with UserConsentNeeded field set to True."
+          "Step 4: DUT sends a QueryImage command to the TH/OTA-P.
+          RequestorCanConsent is set to True by DUT. OTA-P/TH responds with a
+          QueryImageResponse with UserConsentNeeded field set to True."
       PICS: MCORE.OTA.RequestorConsent
       verification: |
           Run the Provider App using
@@ -150,8 +150,8 @@ tests:
       disabled: true
 
     - label:
-          "Force an error during the download of the OTA image to the DUT. Wait
-          for the Idle timeout which should be no less than 5 minutes."
+          "Step 5: Force an error during the download of the OTA image to the
+          DUT. Wait for the Idle timeout which should be no less than 5 minutes."
       verification: |
           ./chip-tool interactive start
 
@@ -184,9 +184,10 @@ tests:
       disabled: true
 
     - label:
-          "After the OTA image is transferred, DUT sends ApplyUpdateRequest to
-          the OTA-P. OTA-P/TH sends the ApplyUpdateResponse Command to the DUT.
-          Action field is set to 'AwaitNextAction'."
+          "Step 6: After the OTA image is transferred, DUT sends
+          ApplyUpdateRequest to the OTA-P. OTA-P/TH sends the
+          ApplyUpdateResponse Command to the DUT. Action field is set to
+          'AwaitNextAction'."
       verification: |
           ./chip-tool interactive start
 
@@ -232,9 +233,10 @@ tests:
       disabled: true
 
     - label:
-          "DUT successfully finishes applying a software update, and the new
-          software image version is being executed on the DUT. OTA-Subscriber
-          sends a read request to read the VersionApplied event from the DUT."
+          "Step 7: DUT successfully finishes applying a software update, and the
+          new software image version is being executed on the DUT.
+          OTA-Subscriber sends a read request to read the VersionApplied event
+          from the DUT."
       verification: |
           ./chip-tool otasoftwareupdaterequestor announce-otaprovider 0xDEADBEEF 0 0 0 0x1234567890 0
 

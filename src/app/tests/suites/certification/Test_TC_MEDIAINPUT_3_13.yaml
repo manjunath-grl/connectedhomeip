@@ -24,7 +24,7 @@ config:
     endpoint: 1
 
 tests:
-    - label: "Wait for the commissioned device to be retrieved"
+    - label: "PreCondition: Wait for the commissioned device to be retrieved"
       cluster: "DelayCommands"
       command: "WaitForCommissionee"
       arguments:
@@ -35,13 +35,13 @@ tests:
     #Issue 13029
     #This step implicitly validating the attribute(InputList)constraints, as long as the payload is being parsed successfully
     - label:
-          "TH reads the InputList attribute from the DUT to show list of Inputs
-          available"
+          "Step 1: TH reads the InputList attribute from the DUT to show list of
+          Inputs available"
       PICS: MEDIAINPUT.S.A0000
       command: "readAttribute"
       attribute: "InputList"
 
-    - label: "Rename Input Command"
+    - label: "Step 2: Rename Input Command"
       PICS: MEDIAINPUT.S.C03.Rsp
       command: "RenameInput"
       arguments:
@@ -53,8 +53,8 @@ tests:
 
     # Issue 13029
     - label:
-          "TH reads the InputList attribute from the DUT to show list of Inputs
-          available"
+          "Step 3: TH reads the InputList attribute from the DUT to show list of
+          Inputs available"
       verification: |
           ./chip-tool mediainput read input-list 1 1
           [1651055193.215119][155444:155449] CHIP:TOO: Endpoint: 1 Cluster: 0x0000_0507 Attribute 0x0000_0000 DataVersion: 2695202790

@@ -36,7 +36,9 @@ tests:
           DUT and TH are part of a common group. - Run TC-SC-6.1 to establish this precondition.
       disabled: true
 
-    - label: "TH should have the ACL entry with the AuthMode as Group by DUT"
+    - label:
+          "Step 1: TH should have the ACL entry with the AuthMode as Group by
+          DUT"
       verification: |
           ./chip-tool accesscontrol read  acl 1 0
 
@@ -68,8 +70,8 @@ tests:
       disabled: true
 
     - label:
-          "DUT operator initiates transmission of multicast message to TH (by
-          interacting with DUT)"
+          "Step 2: DUT operator initiates transmission of multicast message to
+          TH (by interacting with DUT)"
       verification: |
           ./chip-tool groupsettings add-group grp1 0x0001
 
@@ -119,6 +121,6 @@ tests:
           Verify the Multicast address follows the format "FF35:0040:FD<Fabric ID>00:<Group ID> and UDP port is 5540   on DUT(chip-tool)log
 
           <<< [E:15304i M:15000] (G) Msg TX to 1:FFFFFFFFFFFF0001 [D5AE] --- Type 0001:08 (IM:InvokeCommandRequest)
-          [1670395515.064662][14427:14429] CHIP:IN: (G) Sending msg 15000 to Multicast IPV6 address "UDP:[ff35:40:fd00::100:1]:5540"
+          [1670395515.064662][14427:14429] CHIP:IN: (G) Sending msg 15000 to Multicast IPV6 address 'UDP:[ff35:40:fd00::100:1]:5540'
           [1670395515.067533][14427:14429] CHIP:IN: Interface eth0 has a link local address
       disabled: true

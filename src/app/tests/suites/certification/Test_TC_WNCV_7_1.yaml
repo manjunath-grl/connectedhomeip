@@ -34,12 +34,12 @@ tests:
           TH must support at least one of these (0xFFFC) FeatureMap attribute’s flags WNCV.S.F00(LF) & WNCV.S.F02(PA_LF) and/or WNCV.S.F01(TL) & WNCV.S.F04(PA_TL)
       disabled: true
 
-    - label: "Check GoToLiftPercentage command 50%"
+    - label: "Step 1: Check GoToLiftPercentage command 50%"
       verification: |
 
       disabled: true
 
-    - label: "DUT sends GoToLiftPercentage command with 50% to TH"
+    - label: "Step 1a: DUT sends GoToLiftPercentage command with 50% to TH"
       PICS: WNCV.C.C05.Tx
       verification: |
           Product maker needs to provide instructions for how to trigger the command on the DUT. For comparison, the DUT behavior for this test step can be simulated using chip-tool (when DUT is a commissioner/Client)
@@ -75,12 +75,12 @@ tests:
           [1659945446.670626][2742:2742] CHIP:DMG: },
       disabled: true
 
-    - label: "Check GoToTiltPercentage command 50%"
+    - label: "Step 2: Check GoToTiltPercentage command 50%"
       verification: |
 
       disabled: true
 
-    - label: "DUT sends GoToTiltPercentage command with 50% to TH"
+    - label: "Step 2a: DUT sends GoToTiltPercentage command with 50% to TH"
       PICS: WNCV.C.C08.Tx
       verification: |
           Product maker needs to provide instructions for how to trigger the command on the DUT. For comparison, the DUT behavior for this test step can be simulated using chip-tool (when DUT is a commissioner/Client)

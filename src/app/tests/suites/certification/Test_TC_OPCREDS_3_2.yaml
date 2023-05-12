@@ -31,15 +31,15 @@ tests:
           This test case assumes that during Commissioning AddNOC will be sent with ICACValue
       disabled: true
 
-    - label: "Factory Reset DUT"
+    - label: "Step 1: Factory Reset DUT"
       verification: |
           On both DUT and TH side use the below command
           sudo rm -rf /tmp/chip_*
       disabled: true
 
     - label:
-          "Commission DUT to TH1s Fabric When DUT sends NOC response save
-          FabricIndex as FabricIndex_TH1"
+          "Step 2: Commission DUT to TH1s Fabric When DUT sends NOC response
+          save FabricIndex as FabricIndex_TH1"
       verification: |
           DUT side:
           sudo ./chip-all-clusters-app --wifi
@@ -94,14 +94,14 @@ tests:
           [1679562607.576155][126855:126857] CHIP:DMG:                                 ] (241 bytes)
       disabled: true
 
-    - label: "Save TH1s Fabric ID as FabricID1"
+    - label: "Step 3: Save TH1s Fabric ID as FabricID1"
       verification: |
           Refer the above step
       disabled: true
 
     - label:
-          "Commission DUT to TH2s Fabric When DUT sends NOC response save
-          FabricIndex as FabricIndex_TH2"
+          "Step 4: Commission DUT to TH2s Fabric When DUT sends NOC response
+          save FabricIndex as FabricIndex_TH2"
       verification: |
           To commission DUT to TH2 follow below procedure
 
@@ -138,12 +138,12 @@ tests:
           [1673249259.365555][1742:1744] CHIP:EM: <<< [E:13995i M:219921998] (U) Msg TX to 0:0000000000000000 [0000] --- Type 0000:30 (SecureChannel:CASE_Sigma1)
       disabled: true
 
-    - label: "Save TH2s Fabric ID as FabricID2"
+    - label: "Step 5: Save TH2s Fabric ID as FabricID2"
       verification: |
           Refer the above step
       disabled: true
 
-    - label: "From TH1 read the CurrentFabricIndex"
+    - label: "Step 6: From TH1 read the CurrentFabricIndex"
       PICS: OPCREDS.S.A0005
       verification: |
           ./chip-tool operationalcredentials read   current-fabric-index   1 0
@@ -161,7 +161,7 @@ tests:
       disabled: true
 
     - label:
-          "From TH1 read the entire NOCs List attribute with a
+          "Step 8: From TH1 read the entire NOCs List attribute with a
           non-fabric-filtered read"
       verification: |
           ./chip-tool operationalcredentials read nocs 1 0
@@ -193,8 +193,8 @@ tests:
       disabled: true
 
     - label:
-          "From TH1 read the entire NOCs List attribute with a fabric-filtered
-          read"
+          "Step 10: From TH1 read the entire NOCs List attribute with a
+          fabric-filtered read"
       verification: |
           ./chip-tool operationalcredentials read nocs 1 0 --fabric-filtered 1
 
@@ -224,7 +224,7 @@ tests:
           [1658819590.505292][8327:8332] CHIP:TOO:      }
       disabled: true
 
-    - label: "Read NOCStruct values from entry at index 0"
+    - label: "Step 12: Read NOCStruct values from entry at index 0"
       verification: |
           ./chip-tool operationalcredentials read nocs 1 0 --fabric-filtered 1
 
@@ -256,8 +256,8 @@ tests:
       disabled: true
 
     - label:
-          "Read the Fabrics List and get the FabricDescriptorStruct for the
-          entry where FabricIndex = FabricIndex_TH1 from DUT"
+          "Step 14: Read the Fabrics List and get the FabricDescriptorStruct for
+          the entry where FabricIndex = FabricIndex_TH1 from DUT"
       verification: |
           ./chip-tool operationalcredentials read fabrics 1 0
 
@@ -294,7 +294,7 @@ tests:
           [1657693240.722522][15129:15134] CHIP:TOO:      }
       disabled: true
 
-    - label: "From TH2 read the CurrentFabricIndex"
+    - label: "Step 16: From TH2 read the CurrentFabricIndex"
       verification: |
           ./chip-tool operationalcredentials read   current-fabric-index 2 0 --commissioner-name beta
 
@@ -311,7 +311,7 @@ tests:
       disabled: true
 
     - label:
-          "From TH2 read the entire NOCs List attribute with a
+          "Step 18: From TH2 read the entire NOCs List attribute with a
           non-fabric-filtered read"
       verification: |
           ./chip-tool operationalcredentials read nocs 2 0 --commissioner-name beta
@@ -342,8 +342,8 @@ tests:
       disabled: true
 
     - label:
-          "From TH2 read the entire NOCs List attribute with a fabric-filtered
-          read"
+          "Step 20: From TH2 read the entire NOCs List attribute with a
+          fabric-filtered read"
       verification: |
           ./chip-tool operationalcredentials read nocs 2 0 --fabric-filtered 1  --commissioner-name beta
 
@@ -374,7 +374,7 @@ tests:
           [1658819643.546478][8397:8402] CHIP:TOO:      }
       disabled: true
 
-    - label: "Read NOCStruct values from entry at index 1"
+    - label: "Step 22: Read NOCStruct values from entry at index 1"
       verification: |
           ./chip-tool operationalcredentials read nocs 2 0  --commissioner-name beta
 

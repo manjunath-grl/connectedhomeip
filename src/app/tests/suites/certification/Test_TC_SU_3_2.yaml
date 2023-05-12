@@ -27,9 +27,10 @@ config:
 
 tests:
     - label:
-          "OTA-R/TH sends a QueryImage Command to the DUT. RequestorCanConsent
-          field can be set to either True or False in the QueryImage Command.
-          DUT responds with the QueryImageResponse to the OTA-R/TH."
+          "Step 1: OTA-R/TH sends a QueryImage Command to the DUT.
+          RequestorCanConsent field can be set to either True or False in the
+          QueryImage Command. DUT responds with the QueryImageResponse to the
+          OTA-R/TH."
       verification: |
           ./chip-tool otasoftwareupdaterequestor announce-otaprovider 0xDEADBEEF 0 0 0 0x1234567890 0
 
@@ -56,7 +57,7 @@ tests:
       disabled: true
 
     - label:
-          "There should not be any new software update available for the
+          "Step 2: There should not be any new software update available for the
           OTA-R/TH. OTA-R/TH sends a QueryImage Command to the DUT. DUT responds
           with the QueryImageResponse to the OTA-R/TH."
       verification: |
@@ -74,9 +75,9 @@ tests:
       disabled: true
 
     - label:
-          "OTA-R/TH sends a QueryImage Command to the DUT. ProtocolSupported
-          field should list BDX. DUT responds with the QueryImageResponse to the
-          OTA-R/TH."
+          "Step 3: OTA-R/TH sends a QueryImage Command to the DUT.
+          ProtocolSupported field should list BDX. DUT responds with the
+          QueryImageResponse to the OTA-R/TH."
       verification: |
           ./chip-tool otasoftwareupdaterequestor announce-otaprovider 0xDEADBEEF 0 0 0 0x1234567890 0
 
@@ -98,19 +99,19 @@ tests:
       disabled: true
 
     - label:
-          "OTA-R/TH sends a QueryImage Command to the DUT. ProtocolSupported
-          field should list 'https'. DUT responds with a QueryImageResponse to
-          the OTA-R/TH."
+          "Step 4: OTA-R/TH sends a QueryImage Command to the DUT.
+          ProtocolSupported field should list 'https'. DUT responds with a
+          QueryImageResponse to the OTA-R/TH."
       verification: |
           Out of scope for V1.0
       disabled: true
 
     - label:
-          "OTA-R/TH sends a QueryImage Command to the DUT. DUT responds with the
-          QueryImageResponse with QueryStatus set to 'Busy', DelayedActionTime
-          set to 3 minutes. On the subsequent QueryImage command, DUT sends a
-          QueryImageResponse back to OTA-R/TH. QueryStatus is set to
-          'UpdateAvailable'."
+          "Step 5: OTA-R/TH sends a QueryImage Command to the DUT. DUT responds
+          with the QueryImageResponse with QueryStatus set to 'Busy',
+          DelayedActionTime set to 3 minutes. On the subsequent QueryImage
+          command, DUT sends a QueryImageResponse back to OTA-R/TH. QueryStatus
+          is set to 'UpdateAvailable'."
       PICS: OTAP.S.M.DelayedActionTime
       verification: |
           ./chip-ota-provider-app --discriminator 22 --secured-device-port 5565 --KVS /tmp/chip_kvs_provider --filepath /tmp/test.bin -q busy -t 180

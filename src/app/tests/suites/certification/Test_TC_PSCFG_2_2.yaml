@@ -29,12 +29,12 @@ tests:
           This test case is verified after the device is provisioned. Pls provision device first, Pass appropriate nodeID in the below command
       disabled: true
 
-    - label: "Commission DUT to TH"
+    - label: "Step 1: Commission DUT to TH"
       verification: |
 
       disabled: true
 
-    - label: "TH reads the Sources attribute from the DUT"
+    - label: "Step 2: TH reads the Sources attribute from the DUT"
       PICS: PSCFG.S.A0000
       verification: |
           ./chip-tool powersourceconfiguration read sources 1 0
@@ -50,8 +50,8 @@ tests:
       disabled: true
 
     - label:
-          "TH reads the Order attribute from Power Source Cluster at
-          Enpoint[eNr] of the DUT"
+          "Step 3a: TH reads the Order attribute from Power Source Cluster at
+          Endpoint[eNr] of the DUT"
       verification: |
           ./chip-tool powersource read order 1 2
 

@@ -25,7 +25,7 @@ config:
 
 tests:
     - label:
-          "DUT sends the NotifyUpdateApplied Command to the OTA-P after
+          "Step 1: DUT sends the NotifyUpdateApplied Command to the OTA-P after
           installing the software update."
       PICS: OTAR.C.M.NotifyUpdateApplied
       verification: |

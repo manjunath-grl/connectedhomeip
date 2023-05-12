@@ -27,8 +27,8 @@ config:
 
 tests:
     - label:
-          "DUT sends a QueryImage command to the TH/OTA-P. TH/OTA-P sends a
-          QueryImageResponse back to DUT. QueryStatus is set to
+          "Step 1: DUT sends a QueryImage command to the TH/OTA-P. TH/OTA-P
+          sends a QueryImageResponse back to DUT. QueryStatus is set to
           'UpdateAvailable'. Set ImageURI to the location where the image is
           located. After the DUT transfers the image, the DUT should send
           ApplyUpdateRequest to the OTA-P."

@@ -26,9 +26,9 @@ config:
 
 tests:
     - label:
-          "DUT sends a QueryImage command to the TH/OTA-P. RequestorCanConsent
-          is set to True by DUT. OTA-P/TH responds with a QueryImageResponse
-          with UserConsentNeeded field set to True."
+          "Step 1: DUT sends a QueryImage command to the TH/OTA-P.
+          RequestorCanConsent is set to True by DUT. OTA-P/TH responds with a
+          QueryImageResponse with UserConsentNeeded field set to True."
       PICS: MCORE.OTA.RequestorConsent
       verification: |
           Run the OTA Provider App using the command:
@@ -43,8 +43,8 @@ tests:
       disabled: true
 
     - label:
-          "DUT sends a QueryImage command to the TH/OTA-P. TH/OTA-P sends a
-          QueryImageResponse back to DUT. QueryStatus is set to
+          "Step 2: DUT sends a QueryImage command to the TH/OTA-P. TH/OTA-P
+          sends a QueryImageResponse back to DUT. QueryStatus is set to
           'UpdateAvailable'. Set ImageURI to the location where the image is
           located."
       verification: |
@@ -63,8 +63,8 @@ tests:
       disabled: true
 
     - label:
-          "DUT sends a QueryImage command to the TH/OTA-P. TH/OTA-P sends a
-          QueryImageResponse back to DUT. QueryStatus is set to
+          "Step 3: DUT sends a QueryImage command to the TH/OTA-P. TH/OTA-P
+          sends a QueryImageResponse back to DUT. QueryStatus is set to
           'UpdateAvailable'. Set ImageURI with the https url of the software
           image."
       PICS: MCORE.OTA.HTTPS
@@ -73,11 +73,11 @@ tests:
       disabled: true
 
     - label:
-          "During the transfer of the image to the DUT, force fail the transfer
-          before it completely transfers the image. Wait for the Idle timeout so
-          that reading the UpdateState Attribute of the OTA Requestor returns
-          the value as Idle. Initiate another QueryImage Command from DUT to the
-          TH/OTA-P."
+          "Step 4: During the transfer of the image to the DUT, force fail the
+          transfer before it completely transfers the image. Wait for the Idle
+          timeout so that reading the UpdateState Attribute of the OTA Requestor
+          returns the value as Idle. Initiate another QueryImage Command from
+          DUT to the TH/OTA-P."
       verification: |
           ./chip-tool otasoftwareupdaterequestor announce-otaprovider 0xDEADBEEF 0 0 0 0x1234567890 0
 
@@ -134,17 +134,19 @@ tests:
       disabled: true
 
     - label:
-          "During the transfer of the image to the DUT, force fail the transfer
-          before it completely transfers the image. Initiate another QueryImage
-          Command from DUT to the TH/OTA-P. Set the RC[STARTOFS] bit and
-          associated STARTOFS field in the ReceiveInit Message to indicate the
-          resumption of a transfer previously aborted."
+          "Step 5: During the transfer of the image to the DUT, force fail the
+          transfer before it completely transfers the image. Initiate another
+          QueryImage Command from DUT to the TH/OTA-P. Set the RC[STARTOFS] bit
+          and associated STARTOFS field in the ReceiveInit Message to indicate
+          the resumption of a transfer previously aborted."
       PICS: MCORE.OTA.Resume
       verification: |
           Out of scope for V1.0
       disabled: true
 
-    - label: "Perform the OTA Update on DUT using vendor specific mechanism."
+    - label:
+          "Step 6: Perform the OTA Update on DUT using vendor specific
+          mechanism."
       PICS: MCORE.OTA.VendorSpecific
       verification: |
           Use vendor specific steps to initiate OTA Update and verify that the software image is transferred to the DUT

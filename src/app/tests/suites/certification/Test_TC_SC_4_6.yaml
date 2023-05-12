@@ -32,13 +32,13 @@ tests:
       disabled: true
 
     - label:
-          "DUT is instructed to start advertising its presence as a commissioner
-          in the network"
+          "Step 1: DUT is instructed to start advertising its presence as a
+          commissioner in the network"
       verification: |
           To verify this test case use TV Reference app
       disabled: true
 
-    - label: "Check DNS-SD subtypes used by DUT"
+    - label: "Step 2: Check DNS-SD subtypes used by DUT"
       PICS:
           MCORE.SC.DEVTYPE_SUBTYPE && MCORE.SC.VP_KEY && MCORE.SC.DT_KEY &&
           MCORE.SC.DN_KEY

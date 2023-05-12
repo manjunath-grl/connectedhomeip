@@ -26,9 +26,9 @@ config:
 
 tests:
     - label:
-          "OTA-R/TH sends a QueryImage Command to the DUT. Protocol supported
-          should only list 'BDX'. DUT responds with the QueryImageResponse to
-          the OTA-R/TH."
+          "Step 1: OTA-R/TH sends a QueryImage Command to the DUT. Protocol
+          supported should only list 'BDX'. DUT responds with the
+          QueryImageResponse to the OTA-R/TH."
       verification: |
           ./chip-tool otasoftwareupdaterequestor announce-otaprovider 0xDEADBEEF 0 0 0 0x1234567890 0
 
@@ -53,8 +53,8 @@ tests:
       disabled: true
 
     - label:
-          "TH sends a QueryImage command to the DUT. RequestorCanConsent is set
-          to True by TH. DUT responds with a QueryImageResponse with
+          "Step 2: TH sends a QueryImage command to the DUT. RequestorCanConsent
+          is set to True by TH. DUT responds with a QueryImageResponse with
           UserConsentNeeded field set to True."
       PICS: OTAP.S.M.UserConsentNeeded
       verification: |
@@ -67,8 +67,8 @@ tests:
       disabled: true
 
     - label:
-          "TH sends a QueryImage command to the DUT. RequestorCanConsent is set
-          to True by TH. DUT responds with a QueryImageResponse with
+          "Step 3: TH sends a QueryImage command to the DUT. RequestorCanConsent
+          is set to True by TH. DUT responds with a QueryImageResponse with
           UserConsentNeeded field set to False."
       PICS: OTAP.S.M.UserConsentNeeded
       verification: |
@@ -82,11 +82,11 @@ tests:
       disabled: true
 
     - label:
-          "During the transfer of the image from the DUT, force fail the
+          "Step 4: During the transfer of the image from the DUT, force fail the
           transfer before it completely transfers the image. Wait for the Idle
           timeout. Initiate another QueryImage Command from OTA-R/TH to the DUT."
       verification: |
-          ./chip-tool otasoftwareupdaterequestor announce-ota-provider 0xDEADBEEF 0 0 0 0x1234567890 0
+          ./chip-tool otasoftwareupdaterequestor announce-otaprovider 0xDEADBEEF 0 0 0 0x1234567890 0
 
           where 0x1234567890 is OTA Requestor node ID and 0xDEADBEEF is OTA Provider node ID
 
@@ -103,7 +103,7 @@ tests:
       disabled: true
 
     - label:
-          "During the transfer of the image from the DUT, force fail the
+          "Step 5: During the transfer of the image from the DUT, force fail the
           transfer before it completely transfers the image. Initiate another
           QueryImage Command from OTA-R/TH to the DUT. Set the RC[STARTOFS] bit
           and associated STARTOFS field in the ReceiveInit Message sent from the
@@ -112,7 +112,9 @@ tests:
           Out of scope for V1.0
       disabled: true
 
-    - label: "Perform the OTA Update from DUT using vendor specific mechanism."
+    - label:
+          "Step 6: Perform the OTA Update from DUT using vendor specific
+          mechanism."
       PICS: MCORE.OTA.VendorSpecific
       verification: |
           Use vendor specific steps to initiate OTA Update and verify that the software image is transferred from the DUT
