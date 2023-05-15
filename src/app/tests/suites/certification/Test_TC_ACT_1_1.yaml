@@ -64,6 +64,14 @@ tests:
               type: list
               contains: [2]
 
+    - label: "Read the global attribute: EventList"
+      command: "readAttribute"
+      attribute: "EventList"
+      response:
+          constraints:
+              type: list
+              contains: [0, 1]
+
     # Checking only type check all commands are optional
     - label: "Read the global attribute: AcceptedCommandList"
       command: "readAttribute"
