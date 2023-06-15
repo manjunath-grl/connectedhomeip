@@ -44,7 +44,25 @@
         "Test_TC_OO_3_2_Simulated",
         "Test_TC_TSUIC_3_1_Simulated",
         "Test_TC_PCC_3_1_Simulated",
-        "Test_TC_TMP_3_1_Simulated"
+        "Test_TC_TMP_3_1_Simulated",
+        "Test_TC_ALOGIN_12_2_Simulated",		
+        "Test_TC_APPLAUNCHER_3_7_1_Simulated",		
+        "Test_TC_APPLAUNCHER_3_8_1_Simulated",
+        "Test_TC_APPLAUNCHER_3_9_1_Simulated",
+        "Test_TC_AUDIOOUTPUT_7_3_Simulated",
+        "Test_TC_AUDIOOUTPUT_7_4_Simulated",
+        "Test_TC_CHANNEL_5_4_Simulated",
+        "Test_TC_CHANNEL_5_5_Simulated",
+        "Test_TC_CHANNEL_5_6_Simulated",
+        "Test_TC_CONTENTLAUNCHER_10_4_Simulated",
+        "Test_TC_CONTENTLAUNCHER_10_6_Simulated",
+        "Test_TC_KEYPADINPUT_3_1_Simulated",
+        "Test_TC_LOWPOWER_2_2_Simulated",
+        "Test_TC_MEDIAINPUT_3_15_Simulated",
+        "Test_TC_MEDIAINPUT_3_16_Simulated",
+        "Test_TC_MEDIAINPUT_3_17_Simulated",
+        "Test_TC_MEDIAPLAYBACK_6_5_Simulated",
+        "Test_TC_MEDIAPLAYBACK_6_7_Simulated"
     ],
     "collection": ["Test"]
 }
