@@ -1,0 +1,472 @@
+# Copyright (c) 2021 Project CHIP Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+name: 39.3.1. [TC-TSTAT-3.1] Attributes with client as DUT
+
+PICS:
+    - TSTAT.C
+    - TSTAT.C.AM-READ
+    - TSTAT.C.AO-READ
+    - TSTAT.C.AM-WRITE
+    - TSTAT.C.AO-WRITE
+
+config:
+    nodeId: 0x12344321
+    cluster: "Thermostat"
+    endpoint: 0
+
+tests:
+    - label: "Wait for the device to be commissioned"
+      cluster: "DelayCommands"
+      command: "WaitForCommissioning"
+
+    - label: "Reads attributes: LocalTemperature"
+      PICS: TSTAT.S.A0000
+      wait: "readAttribute"
+      attribute: "LocalTemperature"
+
+    - label: "Read attribute: AbsMinHeatSetpointLimit"
+      PICS: TSTAT.S.A0003
+      wait: "readAttribute"
+      attribute: "AbsMinHeatSetpointLimit"
+
+    - label: "Read attribute: AbsMaxHeatSetpointLimit"
+      PICS: TSTAT.S.A0004
+      wait: "readAttribute"
+      attribute: "AbsMaxHeatSetpointLimit"
+
+    - label: "Read attribute: AbsMinCoolSetpointLimit"
+      PICS: TSTAT.S.A0005
+      wait: "readAttribute"
+      attribute: "AbsMinCoolSetpointLimit"
+
+    - label: "Read attribute: AbsMaxCoolSetpointLimit"
+      PICS: TSTAT.S.A0006
+      wait: "readAttribute"
+      attribute: "AbsMaxCoolSetpointLimit"
+
+    - label: "Read attribute: PICoolingDemand"
+      PICS: TSTAT.S.A0007
+      wait: "readAttribute"
+      attribute: "PICoolingDemand"
+
+    - label: "Read attribute: PIHeatingDemand"
+      PICS: TSTAT.S.A0008
+      wait: "readAttribute"
+      attribute: "PIHeatingDemand"
+
+    - label: "Read attribute: OccupiedCoolingSetpoint"
+      PICS: TSTAT.S.A0011
+      wait: "readAttribute"
+      attribute: "OccupiedCoolingSetpoint"
+
+    - label: "Read attribute: OccupiedHeatingSetpoint"
+      PICS: TSTAT.S.A0012
+      wait: "readAttribute"
+      attribute: "OccupiedHeatingSetpoint"
+
+    - label: "Read attribute: UnoccupiedCoolingSetpoint"
+      PICS: TSTAT.S.A0013
+      wait: "readAttribute"
+      attribute: "UnoccupiedCoolingSetpoint"
+
+    - label: "Read attribute: UnoccupiedHeatingSetpoint"
+      PICS: TSTAT.S.A0014
+      wait: "readAttribute"
+      attribute: "UnoccupiedHeatingSetpoint"
+
+    - label: "Read attribute: MinHeatSetpointLimit"
+      PICS: TSTAT.S.A0015
+      wait: "readAttribute"
+      attribute: "MinHeatSetpointLimit"
+
+    - label: "Read attribute: MaxHeatSetpointLimit"
+      PICS: TSTAT.S.A0016
+      wait: "readAttribute"
+      attribute: "MaxHeatSetpointLimit"
+
+    - label: "Read attribute: MinCoolSetpointLimit"
+      PICS: TSTAT.S.A0017
+      wait: "readAttribute"
+      attribute: "MinCoolSetpointLimit"
+
+    - label: "Read attribute: MaxCoolSetpointLimit"
+      PICS: TSTAT.S.A0018
+      wait: "readAttribute"
+      attribute: "MaxCoolSetpointLimit"
+
+    - label: "Read attribute: ControlSequenceOfOperation"
+      PICS: TSTAT.S.A001b
+      wait: "readAttribute"
+      attribute: "ControlSequenceOfOperation"
+
+    - label: "Read attribute: SystemMode"
+      PICS: TSTAT.S.A001c
+      wait: "readAttribute"
+      attribute: "SystemMode"
+
+    - label: "Read attribute: OutdoorTemperature"
+      PICS: TSTAT.S.A0001
+      wait: "readAttribute"
+      attribute: "OutdoorTemperature"
+
+    - label: "Read attribute: Occupancy"
+      wait: "readAttribute"
+      attribute: "Occupancy"
+
+    - label: "Read attribute: HVACSystemTypeConfiguration"
+      PICS: TSTAT.S.A0009
+      wait: "readAttribute"
+      attribute: "HVACSystemTypeConfiguration"
+
+    - label: "Read attribute: LocalTemperatureCalibration"
+      PICS: TSTAT.S.A0010
+      wait: "readAttribute"
+      attribute: "LocalTemperatureCalibration"
+
+    - label: "Read attribute: MinSetpointDeadBand"
+      PICS: TSTAT.S.A0019
+      wait: "readAttribute"
+      attribute: "MinSetpointDeadBand"
+
+    - label: "Read attribute: RemoteSensing"
+      PICS: TSTAT.S.A001a
+      wait: "readAttribute"
+      attribute: "RemoteSensing"
+
+    #- label: "Read attribute: AlarmMask"
+    #  PICS: TSTAT.S.A001d
+    #  wait: "readAttribute"
+    #  attribute: "AlarmMask"
+
+    - label: "Read attribute: ThermostatRunningMode"
+      PICS: TSTAT.S.A001e
+      wait: "readAttribute"
+      attribute: "ThermostatRunningMode"
+
+    - label: "Read attribute: StartOfWeek"
+      PICS: TSTAT.S.A0020
+      wait: "readAttribute"
+      attribute: "StartOfWeek"
+
+    - label: "Read attribute: NumberOfWeeklyTransitions"
+      PICS: TSTAT.S.A0021
+      wait: "readAttribute"
+      attribute: "NumberOfWeeklyTransitions"
+
+    - label: "Read attribute: NumberOfDailyTransitions"
+      PICS: TSTAT.S.A0022
+      wait: "readAttribute"
+      attribute: "NumberOfDailyTransitions"
+
+    - label: "Read attribute: TemperatureSetpointHold"
+      PICS: TSTAT.S.A0023
+      wait: "readAttribute"
+      attribute: "TemperatureSetpointHold"
+
+    - label: "Read attribute: TemperatureSetpointHoldDuration"
+      PICS: TSTAT.S.A0024
+      wait: "readAttribute"
+      attribute: "TemperatureSetpointHoldDuration"
+
+    - label: "Read attribute: ThermostatProgrammingOperationMode"
+      PICS: TSTAT.S.A0025
+      wait: "readAttribute"
+      attribute: "ThermostatProgrammingOperationMode"
+
+    - label: "Read attribute: ThermostatRunningState"
+      PICS: TSTAT.S.A0029
+      wait: "readAttribute"
+      attribute: "ThermostatRunningState"
+
+    - label: "Read attribute: SetpointChangeSource"
+      PICS: TSTAT.S.A0030
+      wait: "readAttribute"
+      attribute: "SetpointChangeSource"
+
+    - label: "Read attribute: SetpointChangeAmount"
+      PICS: TSTAT.S.A0031
+      wait: "readAttribute"
+      attribute: "SetpointChangeAmount"
+
+    - label: "Read attribute: SetpointChangeSourceTimestamp"
+      PICS: TSTAT.S.A0032
+      wait: "readAttribute"
+      attribute: "SetpointChangeSourceTimestamp"
+
+    - label: "Read attribute: OccupiedSetback"
+      PICS: TSTAT.S.A0034
+      wait: "readAttribute"
+      attribute: "OccupiedSetback"
+
+    - label: "Read attribute: OccupiedSetbackMin"
+      PICS: TSTAT.S.A0035
+      wait: "readAttribute"
+      attribute: "OccupiedSetbackMin"
+
+    - label: "Read attribute: OccupiedSetbackMax"
+      PICS: TSTAT.S.A0036
+      wait: "readAttribute"
+      attribute: "OccupiedSetbackMax"
+
+    - label: "Read attribute: UnoccupiedSetback"
+      PICS: TSTAT.S.A0037
+      wait: "readAttribute"
+      attribute: "UnoccupiedSetback"
+
+    - label: "Read attribute: UnoccupiedSetbackMin"
+      PICS: TSTAT.S.A0038
+      wait: "readAttribute"
+      attribute: "UnoccupiedSetbackMin"
+
+    - label: "Read attribute: UnoccupiedSetbackMax"
+      PICS: TSTAT.S.A0039
+      wait: "readAttribute"
+      attribute: "UnoccupiedSetbackMax"
+
+    - label: "Read attribute: EmergencyHeatDelta"
+      PICS: TSTAT.S.A003a
+      wait: "readAttribute"
+      attribute: "EmergencyHeatDelta"
+
+    - label: "Read attribute: ACType"
+      PICS: TSTAT.S.A0040
+      wait: "readAttribute"
+      attribute: "ACType"
+
+    - label: "Read attribute: ACCapacity"
+      PICS: TSTAT.S.A0041
+      wait: "readAttribute"
+      attribute: "ACCapacity"
+
+    - label: "Read attribute: ACRefrigerantType"
+      PICS: TSTAT.S.A0042
+      wait: "readAttribute"
+      attribute: "ACRefrigerantType"
+
+    - label: "Read attribute: ACCompressorType"
+      PICS: TSTAT.S.A0043
+      wait: "readAttribute"
+      attribute: "ACCompressorType"
+
+    - label: "Read attribute: ACErrorCode"
+      PICS: TSTAT.S.A0044
+      wait: "readAttribute"
+      attribute: "ACErrorCode"
+
+    - label: "Read attribute: ACLouverPosition"
+      PICS: TSTAT.S.A0045
+      wait: "readAttribute"
+      attribute: "ACLouverPosition"
+
+    - label: "Read attribute: ACCoilTemperature"
+      wait: "readAttribute"
+      attribute: "ACCoilTemperature"
+
+    - label: "Reads optional attributes from DUT: ACCapacityFormat"
+      PICS: TSTAT.S.A0047
+      wait: "readAttribute"
+      attribute: "ACCapacityformat"
+
+    - label: "write attribute: OccupiedCoolingSetpoint"
+      PICS: TSTAT.S.A0011
+      wait: "writeAttribute"
+      attribute: "OccupiedCoolingSetpoint"
+      arguments:
+          value:
+
+    - label: "write attribute: OccupiedHeatingSetpoint"
+      PICS: TSTAT.S.A0012
+      wait: "writeAttribute"
+      attribute: "OccupiedHeatingSetpoint"
+      arguments:
+          value:
+
+    - label: "write attribute: UnoccupiedCoolingSetpoint"
+      PICS: TSTAT.S.A0013
+      wait: "writeAttribute"
+      attribute: "UnoccupiedCoolingSetpoint"
+      arguments:
+          value:
+
+    - label: "write attribute: UnoccupiedHeatingSetpoint"
+      PICS: TSTAT.S.A0014
+      wait: "writeAttribute"
+      attribute: "UnoccupiedHeatingSetpoint"
+      arguments:
+          value:
+
+    - label: "write attribute: MinHeatSetpointLimit"
+      PICS: TSTAT.S.A0015
+      wait: "writeAttribute"
+      attribute: "MinHeatSetpointLimit"
+      arguments:
+          value:
+
+    - label: "write attribute: MaxHeatSetpointLimit"
+      PICS: TSTAT.S.A0016
+      wait: "writeAttribute"
+      attribute: "MaxHeatSetpointLimit"
+      arguments:
+          value:
+
+    - label: "write attribute: MinCoolSetpointLimit"
+      PICS: TSTAT.S.A0017
+      wait: "writeAttribute"
+      attribute: "MinCoolSetpointLimit"
+      arguments:
+          value:
+
+    - label: "write attribute: MaxCoolSetpointLimit"
+      PICS: TSTAT.S.A0018
+      wait: "writeAttribute"
+      attribute: "MaxCoolSetpointLimit"
+      arguments:
+          value:
+
+    - label: "write attribute: ControlSequenceOfOperation"
+      PICS: TSTAT.S.A001b
+      wait: "writeAttribute"
+      attribute: "ControlSequenceOfOperation"
+      arguments:
+          value:
+
+    - label: "write attribute: SystemMode"
+      PICS: TSTAT.S.A001c
+      wait: "writeAttribute"
+      attribute: "SystemMode"
+      arguments:
+          value:
+
+    - label: "write attribute: HVACSystemTypeConfiguration"
+      PICS: TSTAT.S.A0009
+      wait: "writeAttribute"
+      attribute: "HVACSystemTypeConfiguration"
+      arguments:
+          value:
+
+    - label: "write attribute: LocalTemperatureCalibration"
+      PICS: TSTAT.S.A0010
+      wait: "writeAttribute"
+      attribute: "LocalTemperatureCalibration"
+      arguments:
+          value:
+
+    - label: "write attribute: MinSetpointDeadBand"
+      PICS: TSTAT.S.A0019
+      wait: "writeAttribute"
+      attribute: "MinSetpointDeadBand"
+      arguments:
+          value:
+
+    - label: "write attribute: RemoteSensing"
+      PICS: TSTAT.S.A001a
+      wait: "writeAttribute"
+      attribute: "RemoteSensing"
+      arguments:
+          value:
+
+    - label: "write attribute: TemperatureSetpointHold"
+      PICS: TSTAT.S.A0023
+      wait: "writeAttribute"
+      attribute: "TemperatureSetpointHold"
+      arguments:
+          value:
+
+    - label: "write attribute: TemperatureSetpointHoldDuration"
+      PICS: TSTAT.S.A0024
+      wait: "writeAttribute"
+      attribute: "TemperatureSetpointHoldDuration"
+      arguments:
+          value:
+
+    - label: "write attribute: ThermostatProgrammingOperationMode"
+      PICS: TSTAT.S.A0025
+      wait: "writeAttribute"
+      attribute: "ThermostatProgrammingOperationMode"
+      arguments:
+          value:
+
+    - label: "write attribute: occupiedSetback"
+      PICS: TSTAT.S.A0034
+      wait: "writeAttribute"
+      attribute: "occupiedSetback"
+      arguments:
+          value:
+
+    - label: "write attribute: UnoccupiedSetback"
+      PICS: TSTAT.S.A0037
+      wait: "writeAttribute"
+      attribute: "UnoccupiedSetback"
+      arguments:
+          value:
+
+    - label: "write attribute: EmergencyHeatDelta"
+      PICS: TSTAT.S.A003a
+      wait: "writeAttribute"
+      attribute: "EmergencyHeatDelta"
+      arguments:
+          value:
+
+    - label: "write attribute: ACType"
+      PICS: TSTAT.S.A0040
+      wait: "writeAttribute"
+      attribute: "ACType"
+      arguments:
+          value:
+
+    - label: "write attribute: ACCapacity"
+      PICS: TSTAT.S.A0041
+      wait: "writeAttribute"
+      attribute: "ACCapacity"
+      arguments:
+          value:
+
+    - label: "write attribute: ACRefrigerantType"
+      PICS: TSTAT.S.A0042
+      wait: "writeAttribute"
+      attribute: "ACRefrigerantType"
+      arguments:
+          value:
+
+    - label: "write attribute: ACCompressorType"
+      PICS: TSTAT.S.A0043
+      wait: "writeAttribute"
+      attribute: "ACCompressorType"
+      arguments:
+          value:
+
+    - label: "write attribute: ACErrorCode"
+      PICS: TSTAT.S.A0044
+      wait: "writeAttribute"
+      attribute: "ACErrorCode"
+      arguments:
+          value:
+
+    - label: "write attribute: ACLouverPosition"
+      PICS: TSTAT.S.A0045
+      wait: "writeAttribute"
+      attribute: "ACLouverPosition"
+      arguments:
+          value:
+
+    - label: "write attribute: ACCapacityFormat"
+      PICS: TSTAT.S.A0047
+      wait: "writeAttribute"
+      attribute: "ACCapacityformat"
+      arguments:
+          value:
+
+    #unoccupied-cooling-setpoint
+    #unoccupied-heating-setpoint
