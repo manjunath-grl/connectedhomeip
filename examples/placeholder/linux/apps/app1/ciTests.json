@@ -44,7 +44,8 @@
         "Test_TC_OO_3_2_Simulated",
         "Test_TC_TSUIC_3_1_Simulated",
         "Test_TC_PCC_3_1_Simulated",
-        "Test_TC_TMP_3_1_Simulated"
+        "Test_TC_TMP_3_1_Simulated",
+        "Test_TC_I_3_2_Simulated"
     ],
     "collection": ["Test"]
 }
