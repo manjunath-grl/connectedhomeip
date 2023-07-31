@@ -90,8 +90,6 @@ tests:
     - label: "Write mandatory attribute OnLevel"
       wait: "writeAttribute"
       attribute: "OnLevel"
-      arguments:
-          value:
 
     - label: "Write mandatory attribute Options"
       wait: "writeAttribute"
