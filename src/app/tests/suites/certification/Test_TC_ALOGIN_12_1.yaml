@@ -74,6 +74,8 @@ tests:
           values:
               - name: "SetupPIN"
                 saveAs: setupPIN
+                constraints:
+                    minLength: 11
 
     - label:
           "Step 2: TH sends a Login command to the DUT with test values provided
