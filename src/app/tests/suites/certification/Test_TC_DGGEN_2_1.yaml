@@ -30,6 +30,11 @@ config:
         type: int64u
         defaultValue: "0x0000000000000003"
 
+    payloadValue:
+        type: char_string
+        defaultValue: "MT:-24J042C00KA0648G00"
+        #defaultValue: "MT:-24J0AFN00KA0648G00"
+
 tests:
     - label: "Wait for the commissioned device to be retrieved"
       cluster: "DelayCommands"
@@ -39,10 +44,10 @@ tests:
               - name: "nodeId"
                 value: nodeId
 
-    - label: "Step 1a: Reset Devices to factory defaults"
-      PICS: PICS_SDK_CI_ONLY
-      cluster: "SystemCommands"
-      command: "FactoryReset"
+    # - label: "Step 1a: Reset Devices to factory defaults"
+    #   PICS: PICS_SDK_CI_ONLY
+    #   cluster: "SystemCommands"
+    #   command: "FactoryReset"
 
     - label: "Step 1a: Reset Devices to factory defaults"
       PICS: PICS_USER_PROMPT
@@ -57,7 +62,26 @@ tests:
               - name: "expectedValue"
                 value: "y"
 
-    - label: "Step 1b: Wait for the commissioned device to be retrieved"
+    - label: "Factory-reset the DUT manually waiting for 20 sec"
+      PICS: DGGEN.S.A0003
+      cluster: "DelayCommands"
+      command: "WaitForMs"
+      arguments:
+          values:
+              - name: "ms"
+                value: 20000
+
+    - label: "Recommission the DUT after Factory-reset"
+      cluster: "CommissionerCommands"
+      command: "PairWithCode"
+      arguments:
+          values:
+              - name: "nodeId"
+                value: nodeId
+              - name: "payload"
+                value: payloadValue
+
+    - label: "Wait for the commissioned device to be retrieved"
       cluster: "DelayCommands"
       command: "WaitForCommissionee"
       arguments:
@@ -76,10 +100,10 @@ tests:
               minValue: 0
               maxValue: 1
 
-    - label: "Step 2b: Reboot target device"
-      PICS: PICS_SDK_CI_ONLY
-      cluster: "SystemCommands"
-      command: "Reboot"
+    # - label: "Step 2b: Reboot target device"
+    #   PICS: PICS_SDK_CI_ONLY
+    #   cluster: "SystemCommands"
+    #   command: "Reboot"
 
     - label: "Step 2b: Reboot target device(DUT)"
       PICS: PICS_USER_PROMPT
@@ -93,6 +117,15 @@ tests:
                 value: "Please reboot the DUT and enter 'y' after DUT starts"
               - name: "expectedValue"
                 value: "y"
+
+    - label: "Reboot the DUT manually waiting for 10 sec"
+      PICS: DGGEN.S.A0003
+      cluster: "DelayCommands"
+      command: "WaitForMs"
+      arguments:
+          values:
+              - name: "ms"
+                value: 10000
 
     - label: "Wait for the commissioned device to be retrieved"
       cluster: "DelayCommands"
@@ -212,10 +245,10 @@ tests:
               type: int64u
               minValue: uptime1
 
-    - label: "Step 4c: Reboot target device"
-      PICS: PICS_SDK_CI_ONLY
-      cluster: "SystemCommands"
-      command: "Reboot"
+    # - label: "Step 4c: Reboot target device"
+    #   PICS: PICS_SDK_CI_ONLY
+    #   cluster: "SystemCommands"
+    #   command: "Reboot"
 
     - label: "Step 4c:Reboot target device(DUT)"
       PICS: PICS_USER_PROMPT
@@ -229,6 +262,15 @@ tests:
                 value: "Please reboot the DUT and enter 'y' after DUT starts"
               - name: "expectedValue"
                 value: "y"
+
+    - label: "Reboot the DUT manually waiting for 10 sec"
+      PICS: DGGEN.S.A0003
+      cluster: "DelayCommands"
+      command: "WaitForMs"
+      arguments:
+          values:
+              - name: "ms"
+                value: 10000
 
     - label: "Wait for the commissioned device to be retrieved"
       cluster: "DelayCommands"
@@ -250,10 +292,10 @@ tests:
               type: int64u
               maxValue: uptime2
 
-    - label: "Step 5a: Reboot target device"
-      PICS: PICS_SDK_CI_ONLY
-      cluster: "SystemCommands"
-      command: "Reboot"
+    # - label: "Step 5a: Reboot target device"
+    #   PICS: PICS_SDK_CI_ONLY
+    #   cluster: "SystemCommands"
+    #   command: "Reboot"
 
     - label: "Step 5a: Reboot target device(DUT)"
       PICS: PICS_USER_PROMPT
@@ -267,6 +309,15 @@ tests:
                 value: "Please reboot the DUT and enter 'y' after DUT starts"
               - name: "expectedValue"
                 value: "y"
+
+    - label: "Reboot the DUT manually waiting for 10 sec"
+      PICS: DGGEN.S.A0003
+      cluster: "DelayCommands"
+      command: "WaitForMs"
+      arguments:
+          values:
+              - name: "ms"
+                value: 10000
 
     - label: "Wait for the commissioned device to be retrieved"
       cluster: "DelayCommands"
@@ -436,6 +487,25 @@ tests:
               - name: "expectedValue"
                 value: "y"
 
+    - label: "Factory-reset the DUT manually waiting for 20 sec"
+      PICS: DGGEN.S.A0003
+      cluster: "DelayCommands"
+      command: "WaitForMs"
+      arguments:
+          values:
+              - name: "ms"
+                value: 20000
+
+    - label: "Re-commission the DUT to TH"
+      cluster: "CommissionerCommands"
+      command: "PairWithCode"
+      arguments:
+          values:
+              - name: "nodeId"
+                value: SecondNodeId
+              - name: "payload"
+                value: payloadValue
+
     - label: "Wait for the commissioned device to be retrieved"
       cluster: "DelayCommands"
       command: "WaitForCommissionee"
@@ -475,10 +545,10 @@ tests:
           constraints:
               type: int32u
 
-    - label: "Step 10d: Reboot target device"
-      PICS: PICS_SDK_CI_ONLY
-      cluster: "SystemCommands"
-      command: "Reboot"
+    # - label: "Step 10d: Reboot target device"
+    #   PICS: PICS_SDK_CI_ONLY
+    #   cluster: "SystemCommands"
+    #   command: "Reboot"
 
     - label: "Step 10d: Reboot target device(DUT)"
       PICS: PICS_USER_PROMPT
@@ -492,6 +562,15 @@ tests:
                 value: "Please reboot the DUT and enter 'y' after DUT starts"
               - name: "expectedValue"
                 value: "y"
+
+    - label: "Reboot the DUT manually waiting for 10 sec"
+      PICS: DGGEN.S.A0003
+      cluster: "DelayCommands"
+      command: "WaitForMs"
+      arguments:
+          values:
+              - name: "ms"
+                value: 10000
 
     - label: "Wait for the commissioned device to be retrieved"
       cluster: "DelayCommands"
