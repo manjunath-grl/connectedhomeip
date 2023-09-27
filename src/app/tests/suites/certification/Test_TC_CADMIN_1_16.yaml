@@ -55,6 +55,18 @@ tests:
               - name: "expectedValue"
                 value: "y"
 
+    - label: "Re-commission DUT after FactoryReset"
+      identity: "alpha"
+      cluster: "CommissionerCommands"
+      command: "PairWithCode"
+      PICS: CADMIN.S
+      arguments:
+          values:
+              - name: "nodeId"
+                value: nodeId
+              - name: "payload"
+                value: payload
+
     - label: "Step 1: TH_CR1 starts a commissioning process with DUT_CE"
       identity: "alpha"
       cluster: "DelayCommands"
@@ -302,8 +314,8 @@ tests:
           value:
               [
                   { Label: "", FabricIndex: 1, NodeID: nodeId },
-                  { Label: "", FabricIndex: 4, NodeID: nodeId2 },
                   { Label: "", FabricIndex: 3, NodeID: nodeId3 },
+                  { Label: "", FabricIndex: 4, NodeID: nodeId2 },
               ]
           constraints:
               type: list
