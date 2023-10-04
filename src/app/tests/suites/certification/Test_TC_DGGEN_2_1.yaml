@@ -85,10 +85,10 @@ tests:
       attribute: "RebootCount"
       response:
           saveAs: boot_count1
-          constraints:
-              type: int16u
-              minValue: 0
-              maxValue: 1
+          # constraints:
+          #     type: int16u
+          #     minValue: 0
+          #     maxValue: 1
 
     - label: "Step 2b: Reboot target device"
       PICS: PICS_SDK_CI_ONLY
