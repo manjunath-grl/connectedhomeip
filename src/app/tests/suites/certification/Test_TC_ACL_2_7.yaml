@@ -315,6 +315,7 @@ tests:
       PICS: ACL.S.E01
       command: "readEvent"
       event: "AccessControlExtensionChanged"
+      eventNumber: "LastReceivedEventNumber + 1"
       response:
           value:
               {
@@ -333,6 +334,7 @@ tests:
       identity: "beta"
       command: "readEvent"
       event: "AccessControlExtensionChanged"
+      eventNumber: "LastReceivedEventNumber + 1"
       response:
           value:
               {
