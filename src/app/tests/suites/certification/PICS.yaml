@@ -9953,3 +9953,18 @@ PICS:
       #  Commands generated
     - label: "Does the device implement sending the GetTargetsResponse command?"
       id: EEVSE.S.C00.Tx
+
+    - label:
+          "Does the DUT support the Media Playback client cluster,
+          ActivateAudioTrack command?"
+      id: MEDIAPLAYBACK.C.C0c.Tx
+
+    - label:
+          "Does the DUT support the Media Playback client cluster,
+          ActivateTextTrack command?"
+      id: MEDIAPLAYBACK.C.C0d.Tx
+
+    - label:
+          "Does the DUT support the Media Playback client cluster,
+          DeactivateTextTrack command?"
+      id: MEDIAPLAYBACK.C.C0e.Tx

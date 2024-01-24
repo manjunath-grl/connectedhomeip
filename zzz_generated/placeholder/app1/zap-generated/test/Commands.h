@@ -1632,6 +1632,82 @@ private:
     }
 };
 
+class Test_TC_MEDIAPLAYBACK_6_10_SimulatedSuite : public TestCommand
+{
+public:
+    Test_TC_MEDIAPLAYBACK_6_10_SimulatedSuite() : TestCommand("Test_TC_MEDIAPLAYBACK_6_10_Simulated", 4)
+    {
+        AddArgument("nodeId", 0, UINT64_MAX, &mNodeId);
+        AddArgument("cluster", &mCluster);
+        AddArgument("endpoint", 0, UINT16_MAX, &mEndpoint);
+        AddArgument("timeout", 0, UINT16_MAX, &mTimeout);
+    }
+
+    ~Test_TC_MEDIAPLAYBACK_6_10_SimulatedSuite() {}
+
+private:
+    chip::Optional<chip::NodeId> mNodeId;
+    chip::Optional<chip::CharSpan> mCluster;
+    chip::Optional<chip::EndpointId> mEndpoint;
+    chip::Optional<uint16_t> mTimeout;
+
+    chip::EndpointId GetEndpoint(chip::EndpointId endpoint) { return mEndpoint.HasValue() ? mEndpoint.Value() : endpoint; }
+
+    //
+    // Tests methods
+    //
+
+    void OnResponse(const chip::app::StatusIB & status, chip::TLV::TLVReader * data) override
+    {
+        bool shouldContinue = false;
+
+        switch (mTestIndex - 1)
+        {
+        case 0:
+            VerifyOrReturn(CheckValue("status", chip::to_underlying(status.mStatus), 0));
+            shouldContinue = true;
+            break;
+        default:
+            LogErrorOnFailure(ContinueOnChipMainThread(CHIP_ERROR_INVALID_ARGUMENT));
+        }
+
+        if (shouldContinue)
+        {
+            ContinueOnChipMainThread(CHIP_NO_ERROR);
+        }
+    }
+
+    CHIP_ERROR DoTestStep(uint16_t testIndex) override
+    {
+        using namespace chip::app::Clusters;
+        switch (testIndex)
+        {
+        case 0: {
+            LogStep(0, "Wait for the device to be commissioned");
+            ListFreer listFreer;
+            chip::app::Clusters::DelayCommands::Commands::WaitForCommissioning::Type value;
+            return WaitForCommissioning(kIdentityAlpha, value);
+        }
+        case 1: {
+            LogStep(1, "Step 1: DUT sends ActivateAudioTrack command to TH");
+            VerifyOrDo(!ShouldSkip("MEDIAPLAYBACK.C.C0c.Tx"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitCommand(GetEndpoint(0), MediaPlayback::Id, MediaPlayback::Commands::ActivateAudioTrack::Id);
+        }
+        case 2: {
+            LogStep(2, "Step 2: DUT sends ActivateTextTrack command to TH");
+            VerifyOrDo(!ShouldSkip("MEDIAPLAYBACK.C.C0d.Tx"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitCommand(GetEndpoint(0), MediaPlayback::Id, MediaPlayback::Commands::ActivateTextTrack::Id);
+        }
+        case 3: {
+            LogStep(3, "Step 1: DUT sends DeactivateTextTrack command to TH");
+            VerifyOrDo(!ShouldSkip("MEDIAPLAYBACK.C.C0e.Tx"), return ContinueOnChipMainThread(CHIP_NO_ERROR));
+            return WaitCommand(GetEndpoint(0), MediaPlayback::Id, MediaPlayback::Commands::DeactivateTextTrack::Id);
+        }
+        }
+        return CHIP_NO_ERROR;
+    }
+};
+
 std::unique_ptr<TestCommand> GetTestCommand(std::string testName)
 {
     if (testName == "Test_TC_WNCV_5_1_Simulated")
@@ -1694,6 +1770,10 @@ std::unique_ptr<TestCommand> GetTestCommand(std::string testName)
     {
         return std::unique_ptr<Test_TC_OO_3_2_SimulatedSuite>(new Test_TC_OO_3_2_SimulatedSuite());
     }
+    if (testName == "Test_TC_MEDIAPLAYBACK_6_10_Simulated")
+    {
+        return std::unique_ptr<Test_TC_MEDIAPLAYBACK_6_10_SimulatedSuite>(new Test_TC_MEDIAPLAYBACK_6_10_SimulatedSuite());
+    }
 
     return nullptr;
 }
@@ -1716,4 +1796,5 @@ void PrintTestCommands()
     ChipLogError(chipTool, "\t* Test_TC_CC_9_4_Simulated");
     ChipLogError(chipTool, "\t* Test_TC_DGTHREAD_3_4_Simulated");
     ChipLogError(chipTool, "\t* Test_TC_OO_3_2_Simulated");
+    ChipLogError(chipTool, "\t* Test_TC_MEDIAPLAYBACK_6_10_Simulated");
 }
